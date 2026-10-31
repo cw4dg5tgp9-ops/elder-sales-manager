@@ -7,116 +7,140 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="エルダー営業管理">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="apple-touch-icon" href="./icon-192.png">
 <title>エルダー課 営業管理</title>
 <style>
 :root{--navy:#14283f;--blue:#245b91;--bg:#f3f5f8;--card:#fff;--text:#172334;--muted:#68778a;--line:#e1e6ed;--green:#18794e;--red:#b42318;--amber:#a15c00}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 header{background:var(--navy);color:#fff;padding:18px 16px 16px;position:sticky;top:0;z-index:5}
-header .sub{font-size:11px;opacity:.75;letter-spacing:.08em}header h1{font-size:20px;margin:4px 0 0}
+header .sub{font-size:11px;opacity:.75;letter-spacing:.08em}
+header h1{font-size:20px;margin:4px 0 0}
 main{max-width:760px;margin:auto;padding:14px}
 nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:10}
-nav button{border:0;background:none;color:var(--muted);font-size:11px;padding:5px 8px;display:flex;flex-direction:column;align-items:center;gap:3px}nav button b{font-size:19px;font-weight:500}nav button.active{color:var(--blue);font-weight:700}
+nav button{border:0;background:none;color:var(--muted);font-size:11px;padding:5px 8px;display:flex;flex-direction:column;align-items:center;gap:3px}
+nav button b{font-size:19px;font-weight:500}
+nav button.active{color:var(--blue);font-weight:700}
 .page{display:none}.page.active{display:block}
-h2{font-size:18px;margin:8px 0 12px}.muted{color:var(--muted);font-size:12px}
+h2{font-size:18px;margin:8px 0 12px}
+.muted{color:var(--muted);font-size:12px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:10px}
-.kpi .label{font-size:12px;color:var(--muted)}.kpi .num{font-size:27px;font-weight:750;margin-top:4px}
+.kpi .label{font-size:12px;color:var(--muted)}
+.kpi .num{font-size:27px;font-weight:750;margin-top:4px}
 .section-head{display:flex;align-items:center;justify-content:space-between;margin:18px 0 9px}
 button,.btn{cursor:pointer;border:0;border-radius:10px;padding:11px 13px;font-size:14px;font-weight:650}
-.primary{background:var(--blue);color:#fff}.secondary{background:#eaf0f6;color:var(--navy)}.danger{background:#fff0ef;color:var(--red)}.small{padding:7px 10px;font-size:12px}
+.primary{background:var(--blue);color:#fff}
+.secondary{background:#eaf0f6;color:var(--navy)}
+.danger{background:#fff0ef;color:var(--red)}
+.small{padding:7px 10px;font-size:12px}
 input,select,textarea{width:100%;padding:11px 10px;border:1px solid #cbd4df;border-radius:9px;background:#fff;font-size:16px;color:var(--text);min-height:43px}
+input:disabled{background:#eef1f5;color:#8a96a6}
 textarea{min-height:78px;resize:vertical}
 label{display:block;font-size:12px;color:#435268;font-weight:650;margin:12px 0 5px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.full{grid-column:1/-1}
 .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .filters{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.item-title{font-size:15px;font-weight:750}.item-meta{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6}
+.item-title{font-size:15px;font-weight:750}
+.item-meta{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6}
 .pill{display:inline-block;border-radius:20px;padding:3px 8px;font-size:11px;font-weight:700;background:#edf1f5;color:#435268;margin:2px 3px 2px 0}
-.pill.green{background:#e7f5ed;color:var(--green)}.pill.red{background:#ffebe9;color:var(--red)}.pill.amber{background:#fff3dc;color:var(--amber)}
+.pill.green{background:#e7f5ed;color:var(--green)}
+.pill.red{background:#ffebe9;color:var(--red)}
+.pill.amber{background:#fff3dc;color:var(--amber)}
 .row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
 .empty{text-align:center;color:var(--muted);padding:28px 12px;font-size:13px}
-.progress{height:8px;background:#e8edf2;border-radius:20px;overflow:hidden;margin:8px 0}.progress span{display:block;height:100%;background:#3478b8}
+.progress{height:8px;background:#e8edf2;border-radius:20px;overflow:hidden;margin:8px 0}
+.progress span{display:block;height:100%;background:#3478b8}
 hr{border:0;border-top:1px solid var(--line);margin:13px 0}
 .notice{background:#fff8e8;border:1px solid #f0dfb6;border-radius:11px;padding:11px;font-size:12px;line-height:1.6;color:#694b16;margin-bottom:12px}
+.hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5}
 .hidden{display:none!important}
 @media(min-width:600px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
 <body>
-<header><div class="sub">SHONAN DAIICHIKOSHO · ELDER TEAM</div><h1>エルダー課 営業管理</h1></header>
+<header>
+<div class="sub">SHONAN DAIICHIKOSHO · ELDER TEAM</div>
+<h1>エルダー課 営業管理</h1>
+</header>
 <main>
 <section id="home" class="page active">
-  <div class="section-head"><h2>営業ダッシュボード</h2><span class="muted" id="today"></span></div>
-  <div class="grid">
-    <div class="card kpi"><div class="label">進行中案件</div><div class="num" id="kOpen">0</div></div>
-    <div class="card kpi"><div class="label">期限超過フォロー</div><div class="num" id="kOver" style="color:var(--red)">0</div></div>
-    <div class="card kpi"><div class="label">今月の受注案件</div><div class="num" id="kWon">0</div></div>
-    <div class="card kpi"><div class="label">今週のフォロー</div><div class="num" id="kWeek">0</div></div>
-  </div>
-  <div class="section-head"><h2>今日・期限超過のフォロー</h2><button class="secondary small" onclick="showPage('follow')">すべて見る</button></div>
-  <div id="urgentList"></div>
-  <div class="section-head"><h2>担当者別・進行中案件</h2></div><div id="staffSummary"></div>
-  <div class="actions"><button class="primary" onclick="openForm()">＋ 案件を登録</button></div>
+<div class="section-head"><h2>営業ダッシュボード</h2><span class="muted" id="today"></span></div>
+<div class="grid">
+<div class="card kpi"><div class="label">進行中案件</div><div class="num" id="kOpen">0</div></div>
+<div class="card kpi"><div class="label">期限超過フォロー</div><div class="num" id="kOver" style="color:var(--red)">0</div></div>
+<div class="card kpi"><div class="label">今月の受注案件</div><div class="num" id="kWon">0</div></div>
+<div class="card kpi"><div class="label">今週のフォロー</div><div class="num" id="kWeek">0</div></div>
+</div>
+<div class="section-head"><h2>今日・期限超過のフォロー</h2><button class="secondary small" onclick="showPage('follow')">すべて見る</button></div>
+<div id="urgentList"></div>
+<div class="section-head"><h2>担当者別・進行中案件</h2></div>
+<div id="staffSummary"></div>
+<div class="actions"><button class="primary" onclick="openForm()">＋ 案件を登録</button></div>
 </section>
-
 <section id="cases" class="page">
-  <div class="section-head"><h2>案件一覧</h2><button class="primary small" onclick="openForm()">＋ 新規登録</button></div>
-  <div class="filters">
-    <select id="filterStaff" onchange="renderCases()"><option value="">全担当者</option></select>
-    <select id="filterProduct" onchange="renderCases()"><option value="">全商材</option><option>F850</option><option>F750</option><option>F650</option><option>Pコン</option></select>
-    <select id="filterStatus" onchange="renderCases()"><option value="">全進捗</option><option>初回訪問・情報収集</option><option>提案・デモ実施</option><option>見積提出</option><option>検討・商談継続</option><option>受注</option><option>失注・保留</option></select>
-    <input id="search" placeholder="顧客名・メモを検索" oninput="renderCases()">
-  </div>
-  <div class="muted" id="caseCount"></div><div id="caseList"></div>
+<div class="section-head"><h2>案件一覧</h2><button class="primary small" onclick="openForm()">＋ 新規登録</button></div>
+<div class="filters">
+<select id="filterStaff" onchange="renderCases()"><option value="">全担当者</option></select>
+<select id="filterProduct" onchange="renderCases()"><option value="">全商材</option><option>F850</option><option>F750</option><option>F650</option><option>Pコン</option><option>その他エルダー対象機種</option><option>エルダー開局以外</option></select>
+<select id="filterStatus" onchange="renderCases()"><option value="">全進捗</option><option>初回訪問・情報収集</option><option>提案・デモ実施</option><option>見積提出</option><option>検討・商談継続</option><option>受注</option><option>失注・保留</option></select>
+<input id="search" placeholder="顧客名・メモを検索" oninput="renderCases()">
+</div>
+<div class="muted" id="caseCount"></div>
+<div id="caseList"></div>
 </section>
-
 <section id="follow" class="page">
-  <div class="section-head"><h2>フォロー予定</h2></div>
-  <div class="filters"><select id="followStaff" onchange="renderFollow()"><option value="">全担当者</option></select><select id="followRange" onchange="renderFollow()"><option value="all">すべて</option><option value="over">期限超過・今日</option><option value="week">今後7日間</option><option value="none">予定日未設定</option></select></div>
-  <div id="followList"></div>
+<div class="section-head"><h2>フォロー予定</h2></div>
+<div class="filters">
+<select id="followStaff" onchange="renderFollow()"><option value="">全担当者</option></select>
+<select id="followRange" onchange="renderFollow()"><option value="all">すべて</option><option value="over">期限超過・今日</option><option value="week">今後7日間</option><option value="none">予定日未設定</option></select>
+</div>
+<div id="followList"></div>
 </section>
-
 <section id="results" class="page">
-  <div class="section-head"><h2>営業実績</h2></div>
-  <div class="notice">受注ステータスの案件のみを実績に計上します。台数は案件登録時の確定台数を集計します。</div>
-  <div class="grid">
-    <div class="card kpi"><div class="label">エルダー開局目標</div><div class="num" id="elderActual">0 / 14</div><div class="progress"><span id="elderBar"></span></div><div class="muted" id="elderRate">達成率 0%</div></div>
-    <div class="card kpi"><div class="label">Pコン目標</div><div class="num" id="pActual">0 / 21</div><div class="progress"><span id="pBar"></span></div><div class="muted" id="pRate">達成率 0%</div></div>
-  </div>
-  <div class="section-head"><h2>担当者別・受注台数</h2></div><div id="resultStaff"></div>
-  <div class="section-head"><h2>受注案件一覧</h2></div><div id="wonList"></div>
+<div class="section-head"><h2>営業実績</h2></div>
+<div class="notice">受注ステータスの案件のみを実績に計上します。エルダー開局台数・Pコン開局台数・F850市場投下台数は、それぞれ別々に集計します。「エルダー開局以外」の案件はエルダー開局に加算されません。</div>
+<div class="grid">
+<div class="card kpi"><div class="label">エルダー開局目標</div><div class="num" id="elderActual">0 / 14</div><div class="progress"><span id="elderBar"></span></div><div class="muted" id="elderRate">達成率 0%</div></div>
+<div class="card kpi"><div class="label">Pコン目標</div><div class="num" id="pActual">0 / 21</div><div class="progress"><span id="pBar"></span></div><div class="muted" id="pRate">達成率 0%</div></div>
+<div class="card kpi"><div class="label">F850市場投下</div><div class="num" id="f850Actual">0台</div><div class="muted">エルダー開局とは別集計</div></div>
+</div>
+<div class="section-head"><h2>担当者別・受注台数</h2></div>
+<div id="resultStaff"></div>
+<div class="section-head"><h2>受注案件一覧</h2></div>
+<div id="wonList"></div>
 </section>
-
 <section id="settings" class="page">
-  <h2>データ管理</h2>
-  <div class="notice">このアプリの案件データは、このiPhoneのブラウザ内に保存します。Safariの履歴・Webサイトデータ消去、端末故障、ブラウザ変更などで消える可能性があります。定期的にバックアップしてください。iCloud等への自動同期は行いません。</div>
-  <div class="card"><b>バックアップ</b><p class="muted">登録案件をJSONファイルとして書き出します。ファイルには顧客情報が含まれるため、保存先・共有先に注意してください。</p><button class="primary" onclick="exportData()">バックアップを書き出す</button></div>
-  <div class="card"><b>バックアップから復元</b><p class="muted">JSONバックアップを読み込みます。現在のデータは上書きされます。</p><input type="file" id="importFile" accept=".json,application/json"><div class="actions"><button class="secondary" onclick="importData()">復元する</button></div></div>
-  <div class="card"><b>データ件数</b><div id="dataCount" style="margin:8px 0"></div><button class="danger" onclick="clearAll()">全案件を削除</button></div>
-  <p class="muted">管理者専用の簡易ローカルアプリです。会社の情報管理規程・端末管理ルールに従って利用してください。</p>
+<h2>データ管理</h2>
+<div class="notice">このアプリの案件データは、このiPhoneのブラウザ内に保存します。Safariの履歴・Webサイトデータ消去、端末故障、ブラウザ変更などで消える可能性があります。定期的にバックアップしてください。iCloud等への自動同期は行いません。</div>
+<div class="card"><b>バックアップ</b><p class="muted">登録案件をJSONファイルとして書き出します。ファイルには顧客情報が含まれるため、保存先・共有先に注意してください。</p><button class="primary" onclick="exportData()">バックアップを書き出す</button></div>
+<div class="card"><b>バックアップから復元</b><p class="muted">JSONバックアップを読み込みます。現在のデータは上書きされます。</p><input type="file" id="importFile" accept=".json,application/json"><div class="actions"><button class="secondary" onclick="importData()">復元する</button></div></div>
+<div class="card"><b>データ件数</b><div id="dataCount" style="margin:8px 0"></div><button class="danger" onclick="clearAll()">全案件を削除</button></div>
+<p class="muted">管理者専用の簡易ローカルアプリです。会社の情報管理規程・端末管理ルールに従って利用してください。</p>
 </section>
-
 <section id="edit" class="page">
-  <div class="section-head"><h2 id="formTitle">案件登録</h2><button class="secondary small" onclick="showPage('cases')">戻る</button></div>
-  <form id="caseForm" onsubmit="saveCase(event)">
-    <input type="hidden" id="caseId">
-    <div class="form-grid">
-      <div><label>担当者 *</label><select id="staff" required><option>三浦</option><option>石井</option><option>奥津</option><option>天野</option><option>堀井</option></select></div>
-      <div><label>商材 *</label><select id="product" required><option>F850</option><option>F750</option><option>F650</option><option>Pコン</option></select></div>
-      <div class="full"><label>顧客名・施設名 *</label><input id="customer" required maxlength="100" placeholder="例：〇〇苑、〇〇自治会"></div>
-      <div class="full"><label>案件状況 *</label><select id="status" required><option>初回訪問・情報収集</option><option>提案・デモ実施</option><option>見積提出</option><option>検討・商談継続</option><option>受注</option><option>失注・保留</option></select></div>
-      <div><label>受注確度</label><select id="confidence"><option>高</option><option selected>中</option><option>低</option><option>未評価</option></select></div>
-      <div><label>想定・確定台数</label><input id="units" type="number" min="0" step="1" value="1"></div>
-      <div><label>次回アクション</label><select id="action"><option value="">未設定</option><option>電話</option><option>訪問</option><option>見積提出</option><option>デモ機設置</option><option>デモ機回収</option><option>再提案</option><option>導入後フォロー</option><option>その他</option></select></div>
-      <div><label>次回予定日</label><input id="nextDate" type="date"></div>
-      <div class="full"><label>商談メモ</label><textarea id="memo" maxlength="1500" placeholder="提案内容、決裁者、競合状況、懸念点など"></textarea></div>
-      <div><label>受注日（受注時）</label><input id="wonDate" type="date"></div>
-      <div><label>失注・保留理由</label><input id="lossReason" maxlength="200" placeholder="任意"></div>
-    </div>
-    <div class="actions"><button class="primary" type="submit">保存する</button><button class="secondary" type="button" onclick="resetForm()">入力クリア</button></div>
-  </form>
+<div class="section-head"><h2 id="formTitle">案件登録</h2><button class="secondary small" onclick="showPage('cases')">戻る</button></div>
+<form id="caseForm" onsubmit="saveCase(event)">
+<input type="hidden" id="caseId">
+<div class="form-grid">
+<div><label>担当者 *</label><select id="staff" required><option>三浦</option><option>石井</option><option>奥津</option><option>天野</option><option>堀井</option></select></div>
+<div><label>主な商材 *</label><select id="product" required onchange="applyRules(true)"><option>F850</option><option>F750</option><option>F650</option><option>Pコン</option><option>その他エルダー対象機種</option><option>エルダー開局以外</option></select></div>
+<div class="full"><label>顧客名・施設名 *</label><input id="customer" required maxlength="100" placeholder="例：〇〇苑、〇〇自治会"></div>
+<div class="full"><label>案件状況 *</label><select id="status" required><option>初回訪問・情報収集</option><option>提案・デモ実施</option><option>見積提出</option><option>検討・商談継続</option><option>受注</option><option>失注・保留</option></select></div>
+<div><label>受注確度</label><select id="confidence"><option>高</option><option selected>中</option><option>低</option><option>未評価</option></select></div>
+<div><label>エルダー開局台数</label><input id="elderUnits" type="number" min="0" step="1" value="1"></div>
+<div><label>Pコン開局台数</label><input id="pconUnits" type="number" min="0" step="1" value="0"></div>
+<div><label>F850市場投下台数</label><input id="f850Units" type="number" min="0" step="1" value="0"></div>
+<div class="full"><div class="hint" id="unitHint"></div></div>
+<div class="full"><label>市場投下の内訳</label><input id="f850Detail" maxlength="200" placeholder="例：新規2台、入替1台"></div>
+<div><label>次回アクション</label><select id="action"><option value="">未設定</option><option>電話</option><option>訪問</option><option>見積提出</option><option>デモ機設置</option><option>デモ機回収</option><option>再提案</option><option>導入後フォロー</option><option>その他</option></select></div>
+<div><label>次回予定日</label><input id="nextDate" type="date"></div>
+<div class="full"><label>商談メモ</label><textarea id="memo" maxlength="1500" placeholder="提案内容、決裁者、競合状況、懸念点など"></textarea></div>
+<div><label>受注日（受注時）</label><input id="wonDate" type="date"></div>
+<div><label>失注・保留理由</label><input id="lossReason" maxlength="200" placeholder="任意"></div>
+</div>
+<div class="actions"><button class="primary" type="submit">保存する</button><button class="secondary" type="button" onclick="resetForm()">入力クリア</button></div>
+</form>
 </section>
 </main>
 <nav>
@@ -129,8 +153,23 @@ hr{border:0;border-top:1px solid var(--line);margin:13px 0}
 <script>
 const KEY='elder_sales_manager_v1';
 const STAFF=['三浦','石井','奥津','天野','堀井'];
-const STATUSES=['初回訪問・情報収集','提案・デモ実施','見積提出','検討・商談継続','受注','失注・保留'];
-let cases=load();
+const ELDER_TYPES=['F850','F750','F650','その他エルダー対象機種'];
+const $=id=>document.getElementById(id);
+const num=v=>Math.max(0,Math.floor(Number(v)||0));
+// 旧データ（台数が1項目だった頃）を新項目へ移行
+function norm(c){
+if(c.elderUnits===undefined&&c.pconUnits===undefined&&c.f850Units===undefined){
+const u=num(c.units);
+c.pconUnits=c.product==='Pコン'?u:0;
+c.elderUnits=c.product==='Pコン'?0:u;
+c.f850Units=0;
+}
+c.elderUnits=num(c.elderUnits);c.pconUnits=num(c.pconUnits);c.f850Units=num(c.f850Units);
+c.f850Detail=c.f850Detail||'';
+delete c.units;
+return c;
+}
+let cases=load().map(norm);persist();
 function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
 function persist(){localStorage.setItem(KEY,JSON.stringify(cases))}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -140,77 +179,78 @@ function fmt(d){if(!d)return '未設定';let a=d.split('-');return `${a[1]}/${a[
 function active(c){return !['受注','失注・保留'].includes(c.status)}
 function isOver(c){return active(c)&&c.nextDate&&c.nextDate<today()}
 function inThisWeek(d){if(!d)return false;let now=new Date(today()+'T00:00:00');let end=new Date(now);end.setDate(end.getDate()+7);let x=new Date(d+'T00:00:00');return x>=now&&x<=end}
-function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id));renderAll();window.scrollTo(0,0)}
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id));renderAll();window.scrollTo(0,0)}
 function pillStatus(s){return s==='受注'?'green':s==='失注・保留'?'red':s==='検討・商談継続'?'amber':''}
-function card(c){return `<div class="card"><div class="row"><div><div class="item-title">${esc(c.customer)}</div><div class="item-meta">${esc(c.staff)} · ${esc(c.product)} · ${c.units||0}台</div></div><span class="pill ${pillStatus(c.status)}">${esc(c.status)}</span></div><div style="margin-top:7px"><span class="pill">確度：${esc(c.confidence||'未評価')}</span>${c.action?`<span class="pill">${esc(c.action)}</span>`:''}</div><div class="item-meta">次回：${fmt(c.nextDate)} ${c.nextDate&&isOver(c)?'<span style="color:var(--red);font-weight:700">期限超過</span>':''}<br>${c.memo?esc(c.memo):'メモなし'}</div><div class="actions"><button class="secondary small" onclick="editCase('${c.id}')">編集</button>${c.status!=='受注'?`<button class="secondary small" onclick="quickWon('${c.id}')">受注にする</button>`:''}<button class="danger small" onclick="deleteCase('${c.id}')">削除</button></div></div>`}
+function unitsText(c){let p=[];if(c.elderUnits)p.push(`エルダー開局 ${c.elderUnits}台`);if(c.pconUnits)p.push(`Pコン開局 ${c.pconUnits}台`);if(c.f850Units)p.push(`F850投下 ${c.f850Units}台`);return p.join(' ／ ')||'台数なし'}
+function card(c){return `<div class="card"><div class="row"><div><div class="item-title">${esc(c.customer)}</div><div class="item-meta">${esc(c.staff)} · ${esc(c.product)}<br>${unitsText(c)}${c.f850Detail?`<br>内訳：${esc(c.f850Detail)}`:''}</div></div><span class="pill ${pillStatus(c.status)}">${esc(c.status)}</span></div><div style="margin-top:7px"><span class="pill">確度：${esc(c.confidence||'未評価')}</span>${c.action?`<span class="pill">${esc(c.action)}</span>`:''}</div><div class="item-meta">次回：${fmt(c.nextDate)} ${c.nextDate&&isOver(c)?'<span style="color:var(--red);font-weight:700">期限超過</span>':''}<br>${c.memo?esc(c.memo):'メモなし'}</div><div class="actions"><button class="secondary small" onclick="editCase('${c.id}')">編集</button><button class="secondary small" onclick="copyCase('${c.id}')">コピーして新規作成</button>${c.status!=='受注'?`<button class="secondary small" onclick="quickWon('${c.id}')">受注にする</button>`:''}<button class="danger small" onclick="deleteCase('${c.id}')">削除</button></div></div>`}
 function renderHome(){
- document.getElementById('today').textContent=today().replaceAll('-','/');
- let open=cases.filter(active),over=cases.filter(isOver),won=cases.filter(c=>c.status==='受注'&&(c.wonDate||'').slice(0,7)===today().slice(0,7)),week=cases.filter(c=>active(c)&&inThisWeek(c.nextDate));
- document.getElementById('kOpen').textContent=open.length;document.getElementById('kOver').textContent=over.length;document.getElementById('kWon').textContent=won.length;document.getElementById('kWeek').textContent=week.length;
- let urgent=cases.filter(c=>active(c)&&c.nextDate&&c.nextDate<=today()).sort((a,b)=>a.nextDate.localeCompare(b.nextDate));
- document.getElementById('urgentList').innerHTML=urgent.length?urgent.map(card).join(''):'<div class="card empty">今日・期限超過のフォローはありません。</div>';
- document.getElementById('staffSummary').innerHTML=STAFF.map(s=>`<div class="card row"><b>${s}</b><span>${cases.filter(c=>c.staff===s&&active(c)).length} 件の進行中案件</span></div>`).join('');
+$('today').textContent=today().replaceAll('-','/');
+let open=cases.filter(active),over=cases.filter(isOver),won=cases.filter(c=>c.status==='受注'&&(c.wonDate||'').slice(0,7)===today().slice(0,7)),week=cases.filter(c=>active(c)&&inThisWeek(c.nextDate));
+$('kOpen').textContent=open.length;
+$('kOver').textContent=over.length;
+$('kWon').textContent=won.length;
+$('kWeek').textContent=week.length;
+let urgent=cases.filter(c=>active(c)&&c.nextDate&&c.nextDate<=today()).sort((a,b)=>a.nextDate.localeCompare(b.nextDate));
+$('urgentList').innerHTML=urgent.length?urgent.map(card).join(''):'<div class="card empty">今日・期限超過のフォローはありません。</div>';
+$('staffSummary').innerHTML=STAFF.map(s=>`<div class="card row"><b>${s}</b><span>${cases.filter(c=>c.staff===s&&active(c)).length} 件の進行中案件</span></div>`).join('');
 }
 function renderCases(){
- let fs=document.getElementById('filterStaff').value,fp=document.getElementById('filterProduct').value,ft=document.getElementById('filterStatus').value,q=document.getElementById('search').value.toLowerCase();
- let arr=cases.filter(c=>(!fs||c.staff===fs)&&(!fp||c.product===fp)&&(!ft||c.status===ft)&&(!q||(c.customer+' '+c.memo).toLowerCase().includes(q))).sort((a,b)=>(b.updated||'').localeCompare(a.updated||''));
- document.getElementById('caseCount').textContent=`${arr.length} 件`;
- document.getElementById('caseList').innerHTML=arr.length?arr.map(card).join(''):'<div class="empty">該当する案件はありません。</div>';
+let fs=$('filterStaff').value,fp=$('filterProduct').value,ft=$('filterStatus').value,q=$('search').value.toLowerCase();
+let arr=cases.filter(c=>(!fs||c.staff===fs)&&(!fp||c.product===fp)&&(!ft||c.status===ft)&&(!q||(c.customer+' '+c.memo+' '+c.f850Detail).toLowerCase().includes(q))).sort((a,b)=>(b.updated||'').localeCompare(a.updated||''));
+$('caseCount').textContent=`${arr.length} 件`;
+$('caseList').innerHTML=arr.length?arr.map(card).join(''):'<div class="empty">該当する案件はありません。</div>';
 }
 function renderFollow(){
- let fs=document.getElementById('followStaff').value,range=document.getElementById('followRange').value;
- let arr=cases.filter(c=>active(c)&&(!fs||c.staff===fs));
- if(range==='over')arr=arr.filter(c=>c.nextDate&&c.nextDate<=today());
- if(range==='week')arr=arr.filter(c=>inThisWeek(c.nextDate));
- if(range==='none')arr=arr.filter(c=>!c.nextDate);
- arr.sort((a,b)=>(a.nextDate||'9999').localeCompare(b.nextDate||'9999'));
- document.getElementById('followList').innerHTML=arr.length?arr.map(card).join(''):'<div class="card empty">該当するフォロー予定はありません。</div>';
+let fs=$('followStaff').value,range=$('followRange').value;
+let arr=cases.filter(c=>active(c)&&(!fs||c.staff===fs));
+if(range==='over')arr=arr.filter(c=>c.nextDate&&c.nextDate<=today());
+if(range==='week')arr=arr.filter(c=>inThisWeek(c.nextDate));
+if(range==='none')arr=arr.filter(c=>!c.nextDate);
+arr.sort((a,b)=>(a.nextDate||'9999').localeCompare(b.nextDate||'9999'));
+$('followList').innerHTML=arr.length?arr.map(card).join(''):'<div class="card empty">該当するフォロー予定はありません。</div>';
 }
+function sum(arr,k){return arr.reduce((n,c)=>n+(Number(c[k])||0),0)}
 function renderResults(){
- let won=cases.filter(c=>c.status==='受注');
- let elder=won.filter(c=>c.product!=='Pコン').reduce((n,c)=>n+(Number(c.units)||0),0);
- let pc=won.filter(c=>c.product==='Pコン').reduce((n,c)=>n+(Number(c.units)||0),0);
- document.getElementById('elderActual').textContent=`${elder} / 14`;document.getElementById('pActual').textContent=`${pc} / 21`;
- document.getElementById('elderBar').style.width=Math.min(100,elder/14*100)+'%';document.getElementById('pBar').style.width=Math.min(100,pc/21*100)+'%';
- document.getElementById('elderRate').textContent=`達成率 ${(elder/14*100).toFixed(1)}%`;document.getElementById('pRate').textContent=`達成率 ${(pc/21*100).toFixed(1)}%`;
- document.getElementById('resultStaff').innerHTML=STAFF.map(s=>{let a=won.filter(c=>c.staff===s&&c.product!=='Pコン').reduce((n,c)=>n+(+c.units||0),0),p=won.filter(c=>c.staff===s&&c.product==='Pコン').reduce((n,c)=>n+(+c.units||0),0);return `<div class="card row"><b>${s}</b><span>エルダー ${a}台　/　Pコン ${p}台</span></div>`}).join('');
- document.getElementById('wonList').innerHTML=won.length?won.sort((a,b)=>(b.wonDate||'').localeCompare(a.wonDate||'')).map(card).join(''):'<div class="empty">受注案件はまだありません。</div>';
+let won=cases.filter(c=>c.status==='受注');
+let elder=sum(won,'elderUnits'),pc=sum(won,'pconUnits'),f850=sum(won,'f850Units');
+$('elderActual').textContent=`${elder} / 14`;
+$('pActual').textContent=`${pc} / 21`;
+$('f850Actual').textContent=`${f850}台`;
+$('elderBar').style.width=Math.min(100,elder/14*100)+'%';
+$('pBar').style.width=Math.min(100,pc/21*100)+'%';
+$('elderRate').textContent=`達成率 ${(elder/14*100).toFixed(1)}%`;
+$('pRate').textContent=`達成率 ${(pc/21*100).toFixed(1)}%`;
+$('resultStaff').innerHTML=STAFF.map(s=>{let w=won.filter(c=>c.staff===s);return `<div class="card"><b>${s}</b><div class="item-meta">エルダー開局 ${sum(w,'elderUnits')}台 ／ Pコン開局 ${sum(w,'pconUnits')}台 ／ F850投下 ${sum(w,'f850Units')}台</div></div>`}).join('');
+$('wonList').innerHTML=won.length?won.sort((a,b)=>(b.wonDate||'').localeCompare(a.wonDate||'')).map(card).join(''):'<div class="empty">受注案件はまだありません。</div>';
 }
-function renderSettings(){document.getElementById('dataCount').textContent=`登録案件：${cases.length}件　／　進行中：${cases.filter(active).length}件`}
+function renderSettings(){$('dataCount').textContent=`登録案件：${cases.length}件　／　進行中：${cases.filter(active).length}件`}
 function renderAll(){renderHome();renderCases();renderFollow();renderResults();renderSettings()}
-function fillStaff(){['filterStaff','followStaff'].forEach(id=>{let el=document.getElementById(id);STAFF.forEach(s=>{if(![...el.options].some(o=>o.value===s))el.add(new Option(s,s))})})}
-function openForm(){resetForm();document.getElementById('formTitle').textContent='案件登録';showPage('edit')}
-function resetForm(){document.getElementById('caseForm').reset();document.getElementById('caseId').value='';document.getElementById('units').value=1;document.getElementById('confidence').value='中'}
-function editCase(id){let c=cases.find(x=>x.id===id);if(!c)return;showPage('edit');document.getElementById('formTitle').textContent='案件編集';for(let k of ['id','staff','product','customer','status','confidence','units','action','nextDate','memo','wonDate','lossReason'])document.getElementById(k==='id'?'caseId':k).value=c[k]??''}
-function makeId(){return (window.crypto&&crypto.randomUUID)?crypto.randomUUID():'case-'+Date.now()+'-'+Math.random().toString(36).slice(2,10)}
-function saveCase(e){
- e.preventDefault();
- const val=id=>document.getElementById(id).value;
- const id=val('caseId');
- const old=cases.find(c=>c.id===id);
- const obj={
-  id:id||makeId(), staff:val('staff'), product:val('product'),
-  customer:val('customer').trim(), status:val('status'),
-  confidence:val('confidence'), units:Number(val('units'))||0,
-  action:val('action'), nextDate:val('nextDate'),
-  memo:val('memo').trim(), wonDate:val('wonDate'),
-  lossReason:val('lossReason').trim(),
-  created:old?.created||new Date().toISOString(),
-  updated:new Date().toISOString()
- };
- if(obj.status==='受注'&&!obj.wonDate)obj.wonDate=today();
- if(old)cases=cases.map(c=>c.id===id?obj:c);else cases.push(obj);
- try{persist();showPage('cases');alert('案件を保存しました。')}
- catch(err){alert('保存できませんでした。SafariのWebサイトデータ設定を確認してください。')}
+function fillStaff(){['filterStaff','followStaff'].forEach(id=>{let el=$(id);STAFF.forEach(s=>{if(![...el.options].some(o=>o.value===s))el.add(new Option(s,s))})})}
+// 商材ごとの入力ルール：対象外の台数欄は0固定で入力不可
+function applyRules(fromChange){
+const p=$('product').value,lock=p==='エルダー開局以外';
+const e=$('elderUnits');
+e.disabled=lock;
+if(lock)e.value=0;else if(fromChange&&num(e.value)===0&&ELDER_TYPES.includes(p))e.value=1;
+$('unitHint').textContent=lock?'「エルダー開局以外」のため、エルダー開局台数は0固定です。Pコン開局・F850市場投下は入力できます。':'1件の案件で、エルダー開局・Pコン開局・F850市場投下を同時に入力できます（それぞれ別集計）。';
 }
+function openForm(){resetForm();$('formTitle').textContent='案件登録';showPage('edit')}
+function resetForm(){$('caseForm').reset();$('caseId').value='';$('elderUnits').value=1;$('pconUnits').value=0;$('f850Units').value=0;$('confidence').value='中';applyRules(false)}
+const FIELDS=['staff','product','customer','status','confidence','elderUnits','pconUnits','f850Units','f850Detail','action','nextDate','memo','wonDate','lossReason'];
+function editCase(id){let c=cases.find(x=>x.id===id);if(!c)return;showPage('edit');$('formTitle').textContent='案件編集';$('caseId').value=c.id;for(let k of FIELDS)$(k).value=c[k]??'';applyRules(false)}
+// 既存案件を引き継いで新規作成（ID・受注日・失注理由・次回予定日・日時は初期化）
+function copyCase(id){let c=cases.find(x=>x.id===id);if(!c)return;showPage('edit');resetForm();$('formTitle').textContent='案件コピー（新規作成）';for(let k of ['staff','product','customer','status','confidence','elderUnits','pconUnits','f850Units','f850Detail','action','memo'])$(k).value=c[k]??'';$('nextDate').value='';$('wonDate').value='';$('lossReason').value='';applyRules(false)}
+function saveCase(e){e.preventDefault();let id=$('caseId').value;let old=cases.find(c=>c.id===id);
+const p=$('product').value,elderOK=p!=='エルダー開局以外';
+let obj={id:id||crypto.randomUUID(),staff:$('staff').value,product:p,customer:$('customer').value.trim(),status:$('status').value,confidence:$('confidence').value,elderUnits:elderOK?num($('elderUnits').value):0,pconUnits:num($('pconUnits').value),f850Units:num($('f850Units').value),f850Detail:$('f850Detail').value.trim(),action:$('action').value,nextDate:$('nextDate').value,memo:$('memo').value.trim(),wonDate:$('wonDate').value,lossReason:$('lossReason').value.trim(),created:old?.created||new Date().toISOString(),updated:new Date().toISOString()};
+if(obj.status==='受注'&&!obj.wonDate)obj.wonDate=today();
+if(old)cases=cases.map(c=>c.id===id?obj:c);else cases.push(obj);persist();showPage('cases');alert('案件を保存しました。')}
 function quickWon(id){let c=cases.find(x=>x.id===id);if(!c)return;if(!confirm(`${c.customer} を受注として登録しますか？`))return;c.status='受注';c.wonDate=today();c.updated=new Date().toISOString();persist();renderAll()}
 function deleteCase(id){let c=cases.find(x=>x.id===id);if(!c||!confirm(`${c.customer} の案件を削除しますか？`))return;cases=cases.filter(x=>x.id!==id);persist();renderAll()}
-function exportData(){let blob=new Blob([JSON.stringify({app:'elder-sales-manager',version:1,exportedAt:new Date().toISOString(),cases},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`elder-sales-backup-${today()}.json`;a.click();URL.revokeObjectURL(a.href)}
-function importData(){let f=document.getElementById('importFile').files[0];if(!f){alert('バックアップファイルを選択してください');return}let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(!d||!Array.isArray(d.cases))throw Error();if(!confirm('現在の案件データを上書きして復元します。よろしいですか？'))return;cases=d.cases;persist();renderAll();alert('復元しました')}catch(e){alert('バックアップファイルを読み込めませんでした')}};r.readAsText(f)}
+function exportData(){let blob=new Blob([JSON.stringify({app:'elder-sales-manager',version:2,exportedAt:new Date().toISOString(),cases},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`elder-sales-backup-${today()}.json`;a.click();URL.revokeObjectURL(a.href)}
+function importData(){let f=$('importFile').files[0];if(!f){alert('バックアップファイルを選択してください');return}let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(!d||!Array.isArray(d.cases))throw Error();if(!confirm('現在の案件データを上書きして復元します。よろしいですか？'))return;cases=d.cases.map(norm);persist();renderAll();alert('復元しました')}catch(e){alert('バックアップファイルを読み込めませんでした')}};r.readAsText(f)}
 function clearAll(){if(!confirm('すべての案件を削除します。この操作は元に戻せません。'))return;if(!confirm('本当に全案件を削除しますか？'))return;cases=[];persist();renderAll();alert('全案件を削除しました')}
-fillStaff();renderAll();
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){
- window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
-}
+fillStaff();applyRules(false);renderAll();
 </script>
-</body></html>
+</body>
+</html>
